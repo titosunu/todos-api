@@ -44,6 +44,8 @@ Run Application
 
 open http://localhost:8080 to make sure it's work
 
+This project comes with documentation using [Swagger](https://swagger.io/). go here http://localhost:8080/docs to see it
+
 Enjoy coding
 
 ### Created with ❤️
