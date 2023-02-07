@@ -56,10 +56,6 @@ Run Prettier to tidy up your code
 > npm run prettier
 
 
-
-
-
-
-Enjoy coding
+#### Enjoy coding
 
 ### Created with ❤️
