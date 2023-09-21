@@ -47,6 +47,7 @@ open http://localhost:8080 to make sure it's work
 ## Features
 
 #### Swagger API Documentations
+
 This project comes with documentation using [Swagger](https://swagger.io/). go here http://localhost:8080/docs to see it
 
 #### Prettier
@@ -54,7 +55,6 @@ This project comes with documentation using [Swagger](https://swagger.io/). go h
 Run Prettier to tidy up your code
 
 > npm run prettier
-
 
 #### Enjoy coding
 

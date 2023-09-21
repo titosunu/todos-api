@@ -4,6 +4,7 @@ const router = express.Router();
 
 const UserController = require("../app/controller/user.controller");
 const UserValidator = require("../app/validator/user.validator");
+const AuthMiddleware = require("../middleware/auth.middleware");
 
 /**
  * @openapi
@@ -12,6 +13,8 @@ const UserValidator = require("../app/validator/user.validator");
  *     tags:
  *     - User
  *     summary: Get all user
+ *     security:
+ *	     - bearerAuth: []
  *     responses:
  *      200:
  *        description: Success
@@ -20,7 +23,7 @@ const UserValidator = require("../app/validator/user.validator");
  *      500:
  *        description: Server Error
  */
-router.get("/user", UserController.index);
+router.get("/user", AuthMiddleware, UserController.index);
 
 /**
  * @openapi
@@ -29,6 +32,8 @@ router.get("/user", UserController.index);
  *     tags:
  *     - User
  *     summary: Add User
+ *     security:
+ *	     - bearerAuth: []
  *     requestBody:
  *      required: true
  *      content:
@@ -56,7 +61,7 @@ router.get("/user", UserController.index);
  *      500:
  *        description: Server Error
  */
-router.post("/user", UserValidator.store, UserController.store);
+router.post("/user", AuthMiddleware, UserValidator.store, UserController.store);
 
 /**
  * @openapi
@@ -65,6 +70,8 @@ router.post("/user", UserValidator.store, UserController.store);
  *     tags:
  *     - User
  *     summary: Get user
+ *     security:
+ *	     - bearerAuth: []
  *     parameters:
  *     - name: id
  *       in: path
@@ -78,7 +85,7 @@ router.post("/user", UserValidator.store, UserController.store);
  *      500:
  *        description: Server Error
  */
-router.get("/user/:id", UserController.show);
+router.get("/user/:id", AuthMiddleware, UserController.show);
 
 /**
  * @openapi
@@ -87,6 +94,8 @@ router.get("/user/:id", UserController.show);
  *     tags:
  *     - User
  *     summary: Update User
+ *     security:
+ *	     - bearerAuth: []
  *     parameters:
  *     - name: id
  *       in: path
@@ -119,7 +128,7 @@ router.get("/user/:id", UserController.show);
  *      500:
  *        description: Server Error
  */
-router.put("/user/:id", UserController.update);
+router.put("/user/:id", AuthMiddleware, UserValidator.update, UserController.update);
 
 /**
  * @openapi
@@ -128,6 +137,8 @@ router.put("/user/:id", UserController.update);
  *     tags:
  *     - User
  *     summary: Delete user
+ *     security:
+ *	     - bearerAuth: []
  *     parameters:
  *     - name: id
  *       in: path
@@ -141,6 +152,6 @@ router.put("/user/:id", UserController.update);
  *      500:
  *        description: Server Error
  */
-router.delete("/user/:id", UserController.destroy);
+router.delete("/user/:id", AuthMiddleware, UserController.destroy);
 
 module.exports = router;

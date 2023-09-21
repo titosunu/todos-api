@@ -8,7 +8,7 @@ const index = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "OK!",
       data: users,
     });
   } catch (error) {
@@ -29,7 +29,7 @@ const store = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Success create!",
       data: user,
     });
   } catch (error) {
@@ -46,7 +46,7 @@ const show = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "OK!",
       data: user,
     });
   } catch (error) {
@@ -64,14 +64,21 @@ const update = async (req, res) => {
       .patch({
         name: req.body.name,
         email: req.body.email,
-        password: await bcrypt.hash(req.body.password, 10),
       });
 
-      res.status(200).json({
-        status: 200,
-        message: "OK",
-        data: user,
-      });
+      if(req.body.password){
+        await User.query()
+          .findById(req.params.id)
+          .patch({
+            password: await bcrypt.hash(req.body.password, 10),
+          });
+      }
+
+    res.status(200).json({
+      status: 200,
+      message: "Success update!",
+      data: user,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -86,7 +93,7 @@ const destroy = async (req, res) => {
 
     res.status(200).json({
       status: 200,
-      message: "OK",
+      message: "Success delete!",
       data: user,
     });
   } catch (error) {

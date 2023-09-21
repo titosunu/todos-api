@@ -28,16 +28,10 @@ exports.swagger = (app) => {
       },
     },
     // looks for configuration in specified directories
-    apis: [
-      "./routes/*.js",
-    ],
+    apis: ["./routes/*.js"],
   };
 
-  app.use(
-    `/docs`,
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerJsdoc(options))
-  );
+  app.use(`/docs`, swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 
   const swaggerSpec = swaggerJsdoc(options);
   app.use(`/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
