@@ -6,27 +6,13 @@ const User = require("../model/user.model");
 const login = async (req, res) => {
   try {
     const user = await User.query()
-      .select([
-        "users.id",
-        "users.name",
-        "users.email",
-        "users.password",
-        "users.created_at",
-        "users.updated_at",
-      ])
+      .select(["users.id", "users.username", "users.email", "users.password"])
       .where("email", req.body.email)
       .first();
 
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       const user_data = await User.query()
-        .select([
-          "users.id",
-          "users.name",
-          "users.email",
-          "users.password",
-          "users.created_at",
-          "users.updated_at",
-        ])
+        .select(["users.id", "users.username", "users.email", "users.password"])
         .where("id", user.id)
         .first();
 
@@ -38,9 +24,8 @@ const login = async (req, res) => {
 
       res.status(200).json({
         message: "Login success!",
-        data: user_data
+        data: user_data,
       });
-
     } else {
       res.status(400).json({
         message: "Invalid Credentials!",

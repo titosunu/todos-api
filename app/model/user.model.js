@@ -12,19 +12,15 @@ class User extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-
-      required: ["name", "email", "password"],
-
+      required: ["username", "email", "password"], // Required fields
       properties: {
-        name: {
-          type: "string",
-        },
-        email: {
-          type: "string",
-        },
-        password: {
-          type: "string",
-        },
+        id: { type: "integer" },
+        username: { type: "string" },
+        email: { type: "string", format: "email" },
+        mobile_number: { type: "integer" },
+        password: { type: "string" },
+        created_at: { type: "string", format: "date-time" },
+        updated_at: { type: "string", format: "date-time" },
       },
     };
   }

@@ -22,8 +22,9 @@ const index = async (req, res) => {
 const store = async (req, res) => {
   try {
     const user = await User.query().insert({
-      name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
+      mobile_number: req.body.mobile_number,
       password: await bcrypt.hash(req.body.password, 10),
     });
 
@@ -59,20 +60,19 @@ const show = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const user = await User.query()
-      .findById(req.params.id)
-      .patch({
-        name: req.body.name,
-        email: req.body.email,
-      });
+    const user = await User.query().findById(req.params.id).patch({
+      username: req.body.username,
+      email: req.body.email,
+      mobile_number: req.body.mobile_number,
+    });
 
-      if(req.body.password){
-        await User.query()
-          .findById(req.params.id)
-          .patch({
-            password: await bcrypt.hash(req.body.password, 10),
-          });
-      }
+    if (req.body.password) {
+      await User.query()
+        .findById(req.params.id)
+        .patch({
+          password: await bcrypt.hash(req.body.password, 10),
+        });
+    }
 
     res.status(200).json({
       status: 200,
