@@ -9,7 +9,6 @@
     "dev": "nodemon server.js",
     "prettier": "npx prettier --write ."
   },
-  "author": "mtaufiikh",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.18.3",
